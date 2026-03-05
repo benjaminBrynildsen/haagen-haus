@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Häagen Haus — Historic Guest House | Alton, Illinois</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --charcoal: #2C2C2C;
+      --gold: #B8956A;
+      --gold-light: #D4B896;
+      --dark-green: #3A4A3A;
+      --warm-gray: #8B8178;
+      --white: #FFFFFF;
+      --section-pad: 100px;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--cream);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(44,44,44,0.95);
+      backdrop-filter: blur(10px);
+      padding: 18px 60px;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; color: var(--gold-light);
+      letter-spacing: 3px; text-transform: uppercase;
+    }
+    nav .nav-links a {
+      color: var(--cream); text-decoration: none;
+      font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+      margin-left: 40px; font-weight: 400;
+      transition: color 0.3s;
+    }
+    nav .nav-links a:hover { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      text-align: center; color: var(--white);
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .hero-bg img { filter: brightness(0.35); }
+    .hero-content { position: relative; z-index: 1; max-width: 800px; padding: 0 40px; }
+    .hero-badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 24px;
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4.5rem;
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 40px rgba(0,0,0,0.3);
+    }
+    .hero h1 em { font-style: italic; color: var(--gold-light); }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 300;
+      margin-bottom: 50px;
+      letter-spacing: 1px;
+    }
+    .hero-cta {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--white);
+      padding: 16px 48px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    /* SECTIONS */
+    section { padding: var(--section-pad) 60px; }
+
+    .section-label {
+      font-size: 0.75rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 30px;
+    }
+    .section-text {
+      font-size: 1.05rem;
+      color: var(--warm-gray);
+      max-width: 650px;
+      line-height: 1.9;
+    }
+
+    /* STORY */
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .story-image {
+      width: 100%;
+      height: 550px;
+      position: relative;
+      overflow: hidden;
+    }
+    .story-image .frame {
+      position: absolute; inset: 15px;
+      border: 1px solid rgba(255,255,255,0.3);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* PHOTO GALLERY */
+    .gallery {
+      background: var(--white);
+    }
+    .gallery-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 280px 280px 280px;
+      gap: 12px;
+      margin-top: 50px;
+    }
+    .gallery-grid .gal-item {
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-grid .gal-item img {
+      transition: transform 0.6s ease;
+    }
+    .gallery-grid .gal-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-grid .gal-item.tall {
+      grid-row: span 2;
+    }
+
+    /* HIGHLIGHTS GRID */
+    .highlights {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+    .highlights-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .highlights .section-text { color: rgba(255,255,255,0.5); }
+    .highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 50px;
+      margin-top: 60px;
+    }
+    .highlight-card {
+      padding: 40px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: border-color 0.3s;
+    }
+    .highlight-card:hover { border-color: var(--gold); }
+    .highlight-card .icon { font-size: 2rem; margin-bottom: 20px; }
+    .highlight-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 400;
+      margin-bottom: 12px;
+    }
+    .highlight-card p {
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+    }
+
+    /* UNITS */
+    .units { max-width: 1200px; margin: 0 auto; }
+    .units-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-top: 60px;
+    }
+    .unit-card {
+      background: var(--white);
+      overflow: hidden;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    }
+    .unit-image {
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+    .unit-badge {
+      position: absolute; top: 20px; left: 20px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 6px 16px;
+      font-size: 0.7rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      z-index: 1;
+    }
+    .unit-info { padding: 35px; }
+    .unit-info h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .unit-rating {
+      color: var(--gold);
+      font-size: 0.85rem;
+      margin-bottom: 16px;
+    }
+    .unit-info p {
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+      margin-bottom: 20px;
+    }
+    .unit-features {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .unit-features span {
+      background: var(--cream);
+      padding: 6px 14px;
+      font-size: 0.78rem;
+      color: var(--charcoal);
+    }
+
+    /* STATS BAR */
+    .stats {
+      background: var(--gold);
+      padding: 60px;
+    }
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: center;
+      color: var(--white);
+    }
+    .stat-item .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem; font-weight: 400;
+      display: block;
+    }
+    .stat-item .label {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-top: 8px;
+      display: block;
+    }
+
+    /* FULL-WIDTH IMAGE BREAK */
+    .image-break {
+      height: 500px;
+      overflow: hidden;
+    }
+
+    /* LOCATION */
+    .location { max-width: 1200px; margin: 0 auto; }
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-top: 50px;
+    }
+    .location-features { list-style: none; }
+    .location-features li {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      font-size: 0.95rem;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .location-features li .emoji { font-size: 1.3rem; }
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: #e8e2d9;
+      display: flex; justify-content: center; align-items: center;
+      color: var(--warm-gray);
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+    }
+
+    /* HISTORY */
+    .history {
+      background: var(--dark-green);
+      color: var(--white);
+    }
+    .history-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .history .section-text {
+      color: rgba(255,255,255,0.6);
+      margin: 0 auto;
+      max-width: 700px;
+    }
+    .timeline {
+      margin-top: 60px;
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+    }
+    .timeline-item { text-align: center; }
+    .timeline-item .year {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .timeline-item .event {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.5);
+      max-width: 160px;
+    }
+
+    /* INVESTMENT */
+    .investment { max-width: 1200px; margin: 0 auto; }
+    .invest-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      margin-top: 50px;
+    }
+    .invest-card {
+      background: var(--white);
+      padding: 40px;
+      border-left: 3px solid var(--gold);
+    }
+    .invest-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem; font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .invest-card p {
+      font-size: 0.9rem;
+      color: var(--warm-gray);
+    }
+
+    /* CTA */
+    .cta-section {
+      background: var(--charcoal);
+      text-align: center;
+      color: var(--white);
+      padding: 120px 60px;
+    }
+    .cta-section .section-title { color: var(--white); }
+    .cta-section .section-text {
+      margin: 0 auto 50px;
+      color: rgba(255,255,255,0.5);
+    }
+    .cta-button {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 18px 56px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: all 0.3s;
+    }
+    .cta-button:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    /* FOOTER */
+    footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.4);
+      text-align: center;
+      padding: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 14px 24px; }
+      nav .nav-links { display: none; }
+      .hero h1 { font-size: 2.8rem; }
+      section { padding: 60px 24px; }
+      .story { grid-template-columns: 1fr; gap: 40px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 250px 250px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(6, 220px); }
+      .gallery-grid .gal-item.tall { grid-row: span 1; }
+      .highlight-grid { grid-template-columns: 1fr; }
+      .units-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+      .location-grid { grid-template-columns: 1fr; }
+      .timeline { flex-direction: column; gap: 30px; }
+      .invest-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo">Häagen Haus</div>
+    <div class="nav-links">
+      <a href="#story">Story</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#suites">Suites</a>
+      <a href="#location">Location</a>
+      <a href="#investment">Investment</a>
+      <a href="#contact">Inquire</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="images/exterior.png" alt="Häagen Haus exterior">
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Established 1861</div>
+      <h1>The Historic<br><em>Häagen Haus</em></h1>
+      <p class="subtitle">A Civil War–era guest house on the Mississippi River bluffs.<br>Turnkey. Iconic. Yours.</p>
+      <a href="#contact" class="hero-cta">Schedule a Private Tour</a>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section id="story">
+    <div class="story">
+      <div>
+        <div class="section-label">The Property</div>
+        <h2 class="section-title">Where History Meets<br>Modern Hospitality</h2>
+        <p class="section-text">
+          Nestled in the heart of Alton's Christian Hill Historic District, the Häagen Haus is a beautifully restored Italianate Federal–style brick building with records dating to 1861. Once home to the Häagen family — who operated Alton's largest mercantile business — this stunning property has been transformed into a fully-furnished, turnkey 4-unit guest house that seamlessly blends Civil War–era charm with modern comfort.
+        </p>
+        <br>
+        <p class="section-text">
+          With highly-rated Airbnb listings, private brick courtyards, gas fireplaces, and panoramic views of the Mississippi River, this is more than a property — it's a legacy.
+        </p>
+      </div>
+      <div class="story-image">
+        <img src="images/hallway.png" alt="Grand hallway with exposed brick and chandelier">
+        <div class="frame"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div class="stat-item">
+        <span class="number">1861</span>
+        <span class="label">Year Built</span>
+      </div>
+      <div class="stat-item">
+        <span class="number">4,273</span>
+        <span class="label">Square Feet</span>
+      </div>
+      <div class="stat-item">
+        <span class="number">4</span>
+        <span class="label">Private Suites</span>
+      </div>
+      <div class="stat-item">
+        <span class="number">4.9</span>
+        <span class="label">Guest Rating</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" id="gallery">
+    <div class="gallery-inner">
+      <div class="section-label">Gallery</div>
+      <h2 class="section-title">Step Inside</h2>
+      <div class="gallery-grid">
+        <div class="gal-item tall">
+          <img src="images/staircase.png" alt="Historic staircase from above">
+        </div>
+        <div class="gal-item">
+          <img src="images/bedroom.png" alt="Four-poster bed suite">
+        </div>
+        <div class="gal-item">
+          <img src="images/bedroom2.png" alt="Suite with fireplace and arched windows">
+        </div>
+        <div class="gal-item">
+          <img src="images/sky-fireplace.jpg" alt="Cozy gas fireplace with classic mantel">
+        </div>
+        <div class="gal-item">
+          <img src="images/eagle-living.jpg" alt="Living room with fireplace and TV">
+        </div>
+        <div class="gal-item">
+          <img src="images/eagle-kitchen-full.jpg" alt="Full kitchen with navy cabinetry">
+        </div>
+        <div class="gal-item">
+          <img src="images/dining.png" alt="Charming dining nook with brick walls">
+        </div>
+        <div class="gal-item">
+          <img src="images/eagle-entry.jpg" alt="Welcoming entry hallway">
+        </div>
+        <div class="gal-item">
+          <img src="images/sky-dining.jpg" alt="Breakfast nook with exposed brick">
+        </div>
+        <div class="gal-item">
+          <img src="images/eagle-livingdining.jpg" alt="Open living and dining space">
+        </div>
+        <div class="gal-item">
+          <img src="images/kitchen.png" alt="Modern kitchen with gold hardware">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS -->
+  <section class="highlights" id="features">
+    <div class="highlights-inner">
+      <div class="section-label">What Makes It Special</div>
+      <h2 class="section-title" style="color: #fff;">Every Detail, Considered</h2>
+      <div class="highlight-grid">
+        <div class="highlight-card">
+          <div class="icon">🔥</div>
+          <h3>Gas Fireplaces</h3>
+          <p>Each suite features a cozy gas fireplace, creating the perfect ambiance for guests year-round.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">🧱</div>
+          <h3>Private Courtyards</h3>
+          <p>Original brick courtyards give every unit its own private outdoor retreat — a rare and cherished feature.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">🍳</div>
+          <h3>Full Kitchens</h3>
+          <p>Fully-equipped kitchens in every suite make both short getaways and extended stays effortless.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">🔑</div>
+          <h3>Keypad Entry</h3>
+          <p>Self-check-in with individual keypad access means minimal management overhead and maximum guest flexibility.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">⚡</div>
+          <h3>Separate Meters</h3>
+          <p>Each unit has its own electric and gas meter — clean accounting and easy expense management.</p>
+        </div>
+        <div class="highlight-card">
+          <div class="icon">🏛️</div>
+          <h3>Historic Registry</h3>
+          <p>Located in the Christian Hill Historic District, listed on the National Register of Historic Places.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FULL-WIDTH IMAGE -->
+  <section class="image-break" style="padding: 0;">
+    <img src="images/exterior.png" alt="Häagen Haus exterior in autumn" style="filter: brightness(0.8);">
+  </section>
+
+  <!-- UNITS -->
+  <section id="suites">
+    <div class="units">
+      <div class="section-label">The Suites</div>
+      <h2 class="section-title">Four Unique Retreats</h2>
+      <p class="section-text">Each suite is individually appointed with its own character, views, and private entrance. Currently operating as highly-rated vacation rentals on Airbnb.</p>
+
+      <div class="units-grid">
+        <div class="unit-card">
+          <div class="unit-image">
+            <div class="unit-badge">★ 4.92 on Airbnb</div>
+            <img src="images/bedroom2.png" alt="Sky View Suite">
+          </div>
+          <div class="unit-info">
+            <h3>Sky View Suite</h3>
+            <div class="unit-rating">★★★★★ Superhost Listing</div>
+            <p>A spacious one-bedroom retreat with king bed, seating area, and stunning views of State Street and the Mississippi River valley.</p>
+            <div class="unit-features">
+              <span>1 Bedroom</span>
+              <span>King Bed</span>
+              <span>Full Kitchen</span>
+              <span>River Views</span>
+              <span>Fireplace</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-image">
+            <div class="unit-badge">★ 4.83 on Airbnb</div>
+            <img src="images/bedroom.png" alt="Eagle View Suite">
+          </div>
+          <div class="unit-info">
+            <h3>Eagle View Suite</h3>
+            <div class="unit-rating">★★★★★ Superhost Listing</div>
+            <p>A generous two-bedroom apartment perfect for families and longer stays, with sweeping views and private courtyard access.</p>
+            <div class="unit-features">
+              <span>2 Bedrooms</span>
+              <span>Full Kitchen</span>
+              <span>Private Courtyard</span>
+              <span>Fireplace</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-image">
+            <div class="unit-badge">Suite 3</div>
+            <img src="images/dining.png" alt="Garden Suite">
+          </div>
+          <div class="unit-info">
+            <h3>Garden Suite</h3>
+            <div class="unit-rating">Private Brick Courtyard</div>
+            <p>Intimate ground-level suite with direct courtyard access, full kitchen, and the warmth of original architectural details.</p>
+            <div class="unit-features">
+              <span>Private Entry</span>
+              <span>Full Kitchen</span>
+              <span>Courtyard</span>
+              <span>Fireplace</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="unit-card">
+          <div class="unit-image">
+            <div class="unit-badge">Suite 4</div>
+            <img src="images/kitchen.png" alt="Heritage Suite">
+          </div>
+          <div class="unit-info">
+            <h3>Heritage Suite</h3>
+            <div class="unit-rating">Historic Character</div>
+            <p>Where Civil War–era charm is most palpable. Original details meet modern comfort in this beautifully appointed suite.</p>
+            <div class="unit-features">
+              <span>Full Kitchen</span>
+              <span>Living Room</span>
+              <span>Private Bath</span>
+              <span>Fireplace</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="history" id="history">
+    <div class="history-inner">
+      <div class="section-label">Heritage</div>
+      <h2 class="section-title">A Story Written in Brick</h2>
+      <p class="section-text">
+        The Häagen family built this home during the Civil War era. By 1885, Häagen had established Alton's largest mercantile business, operating in partnership with his sons Louis J. and Paul F. Häagen. Today, their legacy lives on — offering guests the ambiance of yesteryear with every modern amenity.
+      </p>
+      <div class="timeline">
+        <div class="timeline-item">
+          <span class="year">1861</span>
+          <span class="event">Property records begin during the Civil War</span>
+        </div>
+        <div class="timeline-item">
+          <span class="year">1870</span>
+          <span class="event">Italianate Federal brick structure takes shape</span>
+        </div>
+        <div class="timeline-item">
+          <span class="year">1885</span>
+          <span class="event">Häagen family operates Alton's largest mercantile</span>
+        </div>
+        <div class="timeline-item">
+          <span class="year">Today</span>
+          <span class="event">Turnkey 4-suite guest house with 4.9★ ratings</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="location">
+      <div class="section-label">Location</div>
+      <h2 class="section-title">"San Francisco on<br>the Mississippi"</h2>
+      <p class="section-text">Alton, Illinois — a charming river city with three neighborhoods on the National Register of Historic Places, a vibrant arts district, and endless charm.</p>
+
+      <div class="location-grid">
+        <ul class="location-features">
+          <li><span class="emoji">🚶</span> Walk to downtown restaurants, shops & nightlife</li>
+          <li><span class="emoji">🌊</span> Blocks from the Mississippi River</li>
+          <li><span class="emoji">🏛️</span> Christian Hill Historic District (Nat'l Register)</li>
+          <li><span class="emoji">🎨</span> Arts & Entertainment District with public art</li>
+          <li><span class="emoji">🍷</span> Nearby Grafton wineries & river bluff dining</li>
+          <li><span class="emoji">🦅</span> Great River Road scenic byway & Piasa Bird</li>
+          <li><span class="emoji">🏙️</span> 25 minutes to downtown St. Louis</li>
+          <li><span class="emoji">📜</span> Lewis & Clark, Underground Railroad, Lincoln history</li>
+        </ul>
+        <div class="map-placeholder">
+          <iframe
+            width="100%" height="100%" style="border:0;"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3107.5!2d-90.1847!3d38.8906!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87d8a3c4b5e8f3a1%3A0x1234567890!2s617+State+St%2C+Alton%2C+IL+62002!5e0!3m2!1sen!2sus!4v1709500000000"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVESTMENT -->
+  <section id="investment" style="background: var(--white);">
+    <div class="investment">
+      <div class="section-label">The Opportunity</div>
+      <h2 class="section-title">A Turnkey Investment</h2>
+      <p class="section-text">This isn't just a property — it's an established, revenue-generating hospitality business ready for its next chapter.</p>
+
+      <div class="invest-grid">
+        <div class="invest-card">
+          <h3>Fully Furnished & Operational</h3>
+          <p>All four suites come fully furnished and equipped. Walk in, start hosting. No setup required.</p>
+        </div>
+        <div class="invest-card">
+          <h3>Proven Airbnb Track Record</h3>
+          <p>Established listings with 4.83–4.92 star ratings. Existing reviews and booking history transfer with the property.</p>
+        </div>
+        <div class="invest-card">
+          <h3>Low Management Overhead</h3>
+          <p>Keypad self-check-in, separate utility meters, and independent units make this easy to manage — even remotely.</p>
+        </div>
+        <div class="invest-card">
+          <h3>Growing Tourism Market</h3>
+          <p>Alton sits on the Great River Road scenic byway, attracting history buffs, wine enthusiasts, and weekend travelers year-round.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section" id="contact">
+    <div class="section-label">Get in Touch</div>
+    <h2 class="section-title">Interested in<br>Owning History?</h2>
+    <p class="section-text">
+      Schedule a private tour or request the full property portfolio. This is a rare opportunity to own one of Alton's most iconic properties.
+    </p>
+    <a href="tel:6184447969" class="cta-button">Call (618) 444-7969</a>
+    <br><br><br>
+    <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem;">
+      617 State Street, Alton, Illinois 62002<br>
+      MLS# 22078391 · Listed at $545,000
+    </p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Häagen Haus · 617 State Street, Alton, IL 62002</p>
+  </footer>
+
+</body>
+</html>
