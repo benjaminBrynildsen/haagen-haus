@@ -934,7 +934,12 @@
     </p>
 
     <div class="contact-form" id="contactForm">
-      <form id="inquiryForm">
+      <form action="https://formsubmit.co/benbrynildsen5757@gmail.com" method="POST">
+        <input type="hidden" name="_cc" value="magpiefhhs@gmail.com">
+        <input type="hidden" name="_subject" value="🏛️ New Häagen Haus Inquiry">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://haagenhaus.com?thanks=1">
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Email Address" required>
         <input type="tel" name="phone" placeholder="Phone Number">
@@ -950,9 +955,6 @@
         <button type="submit">Request Property Portfolio</button>
       </form>
     </div>
-    <div class="form-success" id="formSuccess">
-      ✓ Thank you! We'll be in touch within 24 hours.
-    </div>
 
     <br><br>
     <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem;">
@@ -966,35 +968,18 @@
   </footer>
 
   <script>
-    const CONTACT_EMAIL = 'benbrynildsen5757@gmail.com';
-
-    document.getElementById('inquiryForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const fd = new FormData(e.target);
-      const name = fd.get('name');
-      const email = fd.get('email');
-      const phone = fd.get('phone') || 'Not provided';
-      const interest = fd.get('interest');
-      const message = fd.get('message') || 'No additional message';
-
-      const subject = encodeURIComponent('Häagen Haus Inquiry from ' + name);
-      const body = encodeURIComponent(
-        'Name: ' + name + '\n' +
-        'Email: ' + email + '\n' +
-        'Phone: ' + phone + '\n' +
-        'Interest: ' + interest + '\n\n' +
-        'Message:\n' + message
-      );
-
-      // Try mailto
-      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
-
-      // Show success regardless (mailto opened their email client)
-      setTimeout(function() {
-        document.getElementById('contactForm').style.display = 'none';
-        document.getElementById('formSuccess').style.display = 'block';
-      }, 500);
-    });
+    // Show thank you message if redirected back after form submission
+    if (window.location.search.includes('thanks=1')) {
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.getElementById('contactForm');
+        if (form) {
+          form.innerHTML = '<div style="text-align:center;color:var(--gold);font-size:1.2rem;padding:40px 0;">✓ Thank you for your interest! We\'ll be in touch within 24 hours.</div>';
+        }
+        // Scroll to contact section
+        var contact = document.getElementById('contact');
+        if (contact) contact.scrollIntoView({behavior:'smooth'});
+      });
+    }
   </script>
 
 </body>
