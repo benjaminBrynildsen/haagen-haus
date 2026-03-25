@@ -416,6 +416,124 @@
       color: var(--white);
     }
 
+    /* INCOME GRID */
+    .income-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      max-width: 700px;
+      margin: 40px auto;
+    }
+    .income-card {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+    }
+    .income-card .unit-name {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-bottom: 6px;
+    }
+    .income-card .unit-amount {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--charcoal);
+    }
+    .income-total {
+      text-align: center;
+      margin: 30px 0 0;
+    }
+    .income-total .big-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      color: var(--gold);
+    }
+    .income-total .label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-top: 4px;
+    }
+    .cash-flow-note {
+      text-align: center;
+      color: var(--warm-gray);
+      font-size: 0.9rem;
+      margin-top: 20px;
+      font-style: italic;
+    }
+
+    /* CONTACT FORM */
+    .contact-form {
+      max-width: 500px;
+      margin: 40px auto 0;
+      text-align: left;
+    }
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      border-radius: 4px;
+      outline: none;
+      transition: border 0.3s;
+    }
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: rgba(255,255,255,0.35);
+    }
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      border-color: var(--gold);
+    }
+    .contact-form select {
+      appearance: none;
+      cursor: pointer;
+    }
+    .contact-form select option {
+      background: var(--charcoal);
+      color: var(--white);
+    }
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+    .contact-form button {
+      width: 100%;
+      border: 1px solid var(--gold);
+      background: transparent;
+      color: var(--gold);
+      padding: 18px;
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+    }
+    .contact-form button:hover {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .form-success {
+      display: none;
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.1rem;
+      padding: 40px;
+    }
+
     /* FOOTER */
     footer {
       background: #1a1a1a;
@@ -442,6 +560,9 @@
       .location-grid { grid-template-columns: 1fr; }
       .timeline { flex-direction: column; gap: 30px; }
       .invest-grid { grid-template-columns: 1fr; }
+      .income-grid { grid-template-columns: 1fr 1fr; }
+      .income-total .big-number { font-size: 2rem; }
+      .contact-form { padding: 0 10px; }
     }
   </style>
 </head>
@@ -772,6 +893,35 @@
           <p>Alton sits on the Great River Road scenic byway, attracting history buffs, wine enthusiasts, and weekend travelers year-round.</p>
         </div>
       </div>
+
+      <!-- INCOME BREAKDOWN -->
+      <div style="margin-top: 80px;">
+        <div class="section-label">Revenue Potential</div>
+        <h2 class="section-title" style="font-size: 2rem;">Monthly Rental Income</h2>
+        <div class="income-grid">
+          <div class="income-card">
+            <div class="unit-name">Skyview Suite</div>
+            <div class="unit-amount">$1,462</div>
+          </div>
+          <div class="income-card">
+            <div class="unit-name">Gardenview Suite</div>
+            <div class="unit-amount">$1,574</div>
+          </div>
+          <div class="income-card">
+            <div class="unit-name">Courtyard Suite</div>
+            <div class="unit-amount">$1,890</div>
+          </div>
+          <div class="income-card">
+            <div class="unit-name">Eagleview Suite</div>
+            <div class="unit-amount">$1,681</div>
+          </div>
+        </div>
+        <div class="income-total">
+          <div class="big-number">$6,607<span style="font-size: 1.2rem; color: var(--warm-gray);">/mo</span></div>
+          <div class="label">Total Potential Rental Income</div>
+        </div>
+        <p class="cash-flow-note">Estimated cash-flow surplus of $1,850–$2,000/month with all units rented (before maintenance & reserves)</p>
+      </div>
     </div>
   </section>
 
@@ -780,13 +930,33 @@
     <div class="section-label">Get in Touch</div>
     <h2 class="section-title">Interested in<br>Owning History?</h2>
     <p class="section-text">
-      Schedule a private tour or request the full property portfolio. This is a rare opportunity to own one of Alton's most iconic properties.
+      Schedule a private tour or request the full investment portfolio. This is a rare opportunity to own one of Alton's most iconic properties.
     </p>
-    <a href="tel:6184447969" class="cta-button">Call (618) 444-7969</a>
-    <br><br><br>
+
+    <div class="contact-form" id="contactForm">
+      <form id="inquiryForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <select name="interest" required>
+          <option value="" disabled selected style="color: rgba(255,255,255,0.35);">I'm interested as a...</option>
+          <option value="STR Investor">Short-Term Rental Investor</option>
+          <option value="Long-Term Investor">Long-Term Rental Investor</option>
+          <option value="Owner-Occupant">Owner-Occupant (live in one, rent the rest)</option>
+          <option value="Property Manager">Property Management Company</option>
+          <option value="Other">Other / Just Curious</option>
+        </select>
+        <textarea name="message" placeholder="Tell us a bit about yourself and what you're looking for..."></textarea>
+        <button type="submit">Request Property Portfolio</button>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      ✓ Thank you! We'll be in touch within 24 hours.
+    </div>
+
+    <br><br>
     <p style="color: rgba(255,255,255,0.3); font-size: 0.85rem;">
-      617 State Street, Alton, Illinois 62002<br>
-      MLS# 22078391 · Listed at $545,000
+      617 State Street, Alton, Illinois 62002
     </p>
   </section>
 
@@ -794,6 +964,39 @@
   <footer>
     <p>© 2026 Häagen Haus · 617 State Street, Alton, IL 62002</p>
   </footer>
+
+  <script>
+    // REPLACE_EMAIL: Update this with your actual email
+    const CONTACT_EMAIL = 'REPLACE_WITH_EMAIL';
+
+    document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = fd.get('name');
+      const email = fd.get('email');
+      const phone = fd.get('phone') || 'Not provided';
+      const interest = fd.get('interest');
+      const message = fd.get('message') || 'No additional message';
+
+      const subject = encodeURIComponent('Häagen Haus Inquiry from ' + name);
+      const body = encodeURIComponent(
+        'Name: ' + name + '\n' +
+        'Email: ' + email + '\n' +
+        'Phone: ' + phone + '\n' +
+        'Interest: ' + interest + '\n\n' +
+        'Message:\n' + message
+      );
+
+      // Try mailto
+      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + body;
+
+      // Show success regardless (mailto opened their email client)
+      setTimeout(function() {
+        document.getElementById('contactForm').style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+      }, 500);
+    });
+  </script>
 
 </body>
 </html>
