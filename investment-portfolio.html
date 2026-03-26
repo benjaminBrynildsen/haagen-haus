@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Häagen Haus — Investment Portfolio</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FAF7F2;
+      --charcoal: #2C2C2C;
+      --gold: #B8956A;
+      --gold-light: #D4B896;
+      --dark-green: #3A4A3A;
+      --warm-gray: #8B8178;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--white);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    @page {
+      size: letter;
+      margin: 0;
+    }
+
+    .page {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.75in;
+      page-break-after: always;
+      position: relative;
+    }
+
+    .page:last-child { page-break-after: auto; }
+
+    /* Cover page */
+    .cover {
+      background: var(--charcoal);
+      color: var(--white);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 1.5in;
+    }
+    .cover .badge {
+      display: inline-block;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 24px;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+    .cover h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.2rem;
+      font-weight: 400;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .cover h1 em { font-style: italic; color: var(--gold-light); }
+    .cover .tagline {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 60px;
+      letter-spacing: 1px;
+    }
+    .cover .address {
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .cover .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 30px auto;
+    }
+    .cover .subtitle {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* Section headers */
+    .section-label {
+      font-size: 0.6rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 20px;
+    }
+    .section-text {
+      font-size: 0.85rem;
+      color: var(--warm-gray);
+      line-height: 1.8;
+      max-width: 600px;
+    }
+
+    /* Page header bar */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    .page-header .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .page-header .page-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin: 30px 0;
+    }
+    .stat-box {
+      background: var(--cream);
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-box .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--charcoal);
+      display: block;
+    }
+    .stat-box .label {
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      margin-top: 4px;
+      display: block;
+    }
+
+    /* Financial tables */
+    .fin-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 0.8rem;
+    }
+    .fin-table th {
+      text-align: left;
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--warm-gray);
+      padding: 10px 12px;
+      border-bottom: 2px solid var(--gold);
+      font-weight: 500;
+    }
+    .fin-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      color: var(--charcoal);
+    }
+    .fin-table tr:last-child td { border-bottom: none; }
+    .fin-table .total td {
+      border-top: 2px solid var(--charcoal);
+      font-weight: 600;
+      padding-top: 14px;
+    }
+    .fin-table .subtotal td {
+      border-top: 1px solid rgba(0,0,0,0.15);
+      font-weight: 500;
+    }
+    .fin-table td:last-child,
+    .fin-table th:last-child { text-align: right; }
+
+    /* Unit cards */
+    .unit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 24px 0;
+    }
+    .unit-fin-card {
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 24px;
+    }
+    .unit-fin-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+    .unit-fin-card .rating {
+      font-size: 0.7rem;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .unit-fin-card .rent {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--charcoal);
+    }
+    .unit-fin-card .rent-label {
+      font-size: 0.65rem;
+      color: var(--warm-gray);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .unit-fin-card .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 14px;
+    }
+    .unit-fin-card .features span {
+      background: var(--cream);
+      padding: 4px 10px;
+      font-size: 0.65rem;
+      color: var(--charcoal);
+    }
+
+    /* Highlight box */
+    .highlight-box {
+      background: var(--dark-green);
+      color: var(--white);
+      padding: 30px;
+      margin: 24px 0;
+      text-align: center;
+    }
+    .highlight-box .big {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      color: var(--gold-light);
+    }
+    .highlight-box .desc {
+      font-size: 0.75rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+    }
+
+    /* House hack section */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 20px 0;
+    }
+    .scenario-card {
+      border-left: 3px solid var(--gold);
+      padding: 20px 24px;
+      background: var(--cream);
+    }
+    .scenario-card h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .scenario-card p {
+      font-size: 0.78rem;
+      color: var(--warm-gray);
+      line-height: 1.6;
+    }
+    .scenario-card .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      color: var(--gold);
+      margin-top: 8px;
+    }
+
+    /* Footer */
+    .page-footer {
+      position: absolute;
+      bottom: 0.75in;
+      left: 0.75in;
+      right: 0.75in;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem;
+      color: var(--warm-gray);
+      letter-spacing: 1px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      padding-top: 12px;
+    }
+
+    /* Print styles */
+    @media print {
+      body { background: white; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        page-break-inside: avoid;
+      }
+      .no-print { display: none; }
+    }
+
+    /* Screen preview */
+    @media screen {
+      body { background: #e8e2d9; padding: 30px 0; }
+      .page {
+        box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+        margin-bottom: 30px;
+        background: white;
+      }
+      .cover { box-shadow: 0 4px 40px rgba(0,0,0,0.15); }
+    }
+
+    .note {
+      font-size: 0.7rem;
+      color: var(--warm-gray);
+      font-style: italic;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER -->
+  <div class="page cover">
+    <div class="badge">Investment Portfolio</div>
+    <h1>The Historic<br><em>Häagen Haus</em></h1>
+    <p class="tagline">A turnkey 4-unit guest house on the Mississippi River bluffs</p>
+    <div class="divider"></div>
+    <p class="address">617 State Street · Alton, Illinois 62002</p>
+    <br><br><br>
+    <p class="subtitle">Confidential — Prepared for Prospective Buyers</p>
+  </div>
+
+  <!-- PAGE 2: PROPERTY OVERVIEW -->
+  <div class="page">
+    <div class="page-header">
+      <div class="logo">Häagen Haus</div>
+      <div class="page-label">Property Overview</div>
+    </div>
+
+    <div class="section-label">At a Glance</div>
+    <h2 class="section-title">A Legacy Property</h2>
+    <p class="section-text">
+      Built during the Civil War era in Alton's Christian Hill Historic District, the Häagen Haus has been meticulously restored into a fully-furnished, turnkey 4-unit guest house. With established Airbnb listings averaging 4.9 stars, this property generates proven rental income from day one.
+    </p>
+
+    <div class="stats-row">
+      <div class="stat-box">
+        <span class="number">1861</span>
+        <span class="label">Year Built</span>
+      </div>
+      <div class="stat-box">
+        <span class="number">4,273</span>
+        <span class="label">Square Feet</span>
+      </div>
+      <div class="stat-box">
+        <span class="number">4</span>
+        <span class="label">Private Suites</span>
+      </div>
+      <div class="stat-box">
+        <span class="number">4.9★</span>
+        <span class="label">Guest Rating</span>
+      </div>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <div class="section-label">Key Features</div>
+      <table class="fin-table">
+        <tr><td>Fully furnished & operational — walk in, start hosting</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Gas fireplaces in every suite</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Full kitchens in every suite</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Private brick courtyards</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Individual keypad entry — self-check-in</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Separate electric & gas meters per unit</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>National Register of Historic Places</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>25 minutes to downtown St. Louis</td><td style="color:var(--gold);">✓</td></tr>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <span>Häagen Haus · 617 State St, Alton, IL 62002</span>
+      <span>2</span>
+    </div>
+  </div>
+
+  <!-- PAGE 3: UNIT-BY-UNIT FINANCIALS -->
+  <div class="page">
+    <div class="page-header">
+      <div class="logo">Häagen Haus</div>
+      <div class="page-label">Unit Financials</div>
+    </div>
+
+    <div class="section-label">Per-Unit Breakdown</div>
+    <h2 class="section-title">Four Revenue Streams</h2>
+    <p class="section-text">Each suite operates independently with its own entrance, utilities, and income potential.</p>
+
+    <div class="unit-grid">
+      <div class="unit-fin-card">
+        <h3>Skyview Suite</h3>
+        <div class="rating">★ 4.92 on Airbnb · Superhost</div>
+        <div class="rent">$1,462</div>
+        <div class="rent-label">Monthly Rental Income</div>
+        <div class="features">
+          <span>1 Bedroom</span>
+          <span>King Bed</span>
+          <span>Full Kitchen</span>
+          <span>River Views</span>
+          <span>Fireplace</span>
+        </div>
+      </div>
+      <div class="unit-fin-card">
+        <h3>Gardenview Suite</h3>
+        <div class="rating">★ on Airbnb · Superhost</div>
+        <div class="rent">$1,574</div>
+        <div class="rent-label">Monthly Rental Income</div>
+        <div class="features">
+          <span>Private Entry</span>
+          <span>Full Kitchen</span>
+          <span>Courtyard</span>
+          <span>Fireplace</span>
+        </div>
+      </div>
+      <div class="unit-fin-card">
+        <h3>Courtyard Suite</h3>
+        <div class="rating">★ on Airbnb · Superhost</div>
+        <div class="rent">$1,890</div>
+        <div class="rent-label">Monthly Rental Income</div>
+        <div class="features">
+          <span>Full Kitchen</span>
+          <span>Living Room</span>
+          <span>Private Bath</span>
+          <span>Fireplace</span>
+        </div>
+      </div>
+      <div class="unit-fin-card">
+        <h3>Eagleview Suite</h3>
+        <div class="rating">★ 4.83 on Airbnb · Superhost</div>
+        <div class="rent">$1,681</div>
+        <div class="rent-label">Monthly Rental Income</div>
+        <div class="features">
+          <span>2 Bedrooms</span>
+          <span>Full Kitchen</span>
+          <span>Courtyard</span>
+          <span>Fireplace</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="big">$6,607<span style="font-size: 1rem; color: rgba(255,255,255,0.5);">/mo</span></div>
+      <div class="desc">Total Monthly Rental Income · $79,284/year</div>
+    </div>
+
+    <div class="page-footer">
+      <span>Häagen Haus · 617 State St, Alton, IL 62002</span>
+      <span>3</span>
+    </div>
+  </div>
+
+  <!-- PAGE 4: OPERATING FINANCIALS -->
+  <div class="page">
+    <div class="page-header">
+      <div class="logo">Häagen Haus</div>
+      <div class="page-label">Operating Financials</div>
+    </div>
+
+    <div class="section-label">Annual Projections</div>
+    <h2 class="section-title">Net Operating Income</h2>
+
+    <table class="fin-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Annual</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Gross Rental Income (4 units)</td><td>$79,284</td></tr>
+        <tr><td>Less: Vacancy Allowance (5%)</td><td>–$3,964</td></tr>
+        <tr class="subtotal"><td><strong>Effective Gross Income</strong></td><td><strong>$75,320</strong></td></tr>
+        <tr><td>&nbsp;</td><td></td></tr>
+        <tr><td>Property Taxes</td><td>–$7,248</td></tr>
+        <tr><td>Insurance</td><td>–$4,211</td></tr>
+        <tr><td>Utilities ($1,250/mo)</td><td>–$15,000</td></tr>
+        <tr><td>Maintenance & Reserves</td><td>–$6,000</td></tr>
+        <tr class="subtotal"><td><strong>Total Operating Expenses</strong></td><td><strong>–$32,459</strong></td></tr>
+        <tr><td>&nbsp;</td><td></td></tr>
+        <tr class="total"><td><strong>Net Operating Income (NOI)</strong></td><td><strong>$42,861</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div style="margin-top: 40px;">
+      <div class="section-label">Valuation Analysis</div>
+      <h2 class="section-title" style="font-size: 1.4rem;">Cap Rate Scenarios</h2>
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>Cap Rate</th>
+            <th>Implied Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>7.0%</td><td>$612,300</td></tr>
+          <tr><td>8.0%</td><td>$535,763</td></tr>
+          <tr><td>9.0%</td><td>$476,233</td></tr>
+          <tr><td>10.0%</td><td>$428,610</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Appraised value: $500,000–$550,000. Turnkey premium justified by established Airbnb listings, furnishings, and proven income history.</p>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <div class="section-label">Monthly Cash Flow</div>
+      <div class="highlight-box" style="display: flex; justify-content: space-around;">
+        <div>
+          <div class="big" style="font-size: 1.8rem;">$3,572</div>
+          <div class="desc">Monthly NOI</div>
+        </div>
+        <div>
+          <div class="big" style="font-size: 1.8rem;">$1,850–$2,000</div>
+          <div class="desc">Est. Cash Flow After Debt Service</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      <span>Häagen Haus · 617 State St, Alton, IL 62002</span>
+      <span>4</span>
+    </div>
+  </div>
+
+  <!-- PAGE 5: HOUSE HACK SCENARIO -->
+  <div class="page">
+    <div class="page-header">
+      <div class="logo">Häagen Haus</div>
+      <div class="page-label">Owner-Occupant Scenario</div>
+    </div>
+
+    <div class="section-label">House Hack Opportunity</div>
+    <h2 class="section-title">Live in One. Rent the Rest.</h2>
+    <p class="section-text">
+      As a 4-unit property, the Häagen Haus qualifies for FHA financing — meaning you can put as little as 3.5% down and live in one suite while the other three generate income to cover your mortgage and then some.
+    </p>
+
+    <div style="margin-top: 30px;">
+      <div class="section-label">Choose Your Suite</div>
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>If You Live In...</th>
+            <th>Remaining 3 Units Earn</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Skyview Suite ($1,462/mo)</td><td>$5,145/mo</td></tr>
+          <tr><td>Gardenview Suite ($1,574/mo)</td><td>$5,033/mo</td></tr>
+          <tr><td>Eagleview Suite ($1,681/mo)</td><td>$4,926/mo</td></tr>
+          <tr><td>Courtyard Suite ($1,890/mo)</td><td>$4,717/mo</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scenario-grid" style="margin-top: 30px;">
+      <div class="scenario-card">
+        <h4>FHA Financing Example</h4>
+        <p>3.5% down on $549,000</p>
+        <div class="number">~$19,215</div>
+        <p style="margin-top: 6px;">Down payment</p>
+        <p style="margin-top: 12px; font-size: 0.75rem;">Estimated monthly PITI: ~$3,800–$4,200<br>(varies by rate and insurance)</p>
+      </div>
+      <div class="scenario-card">
+        <h4>Net Position</h4>
+        <p>Living in Skyview Suite</p>
+        <div class="number">+$945–$1,345/mo</div>
+        <p style="margin-top: 6px;">Positive cash flow while living rent-free</p>
+        <p style="margin-top: 12px; font-size: 0.75rem;">You live in a historic suite with river views — and get paid to do it.</p>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top: 30px;">
+      <div class="big" style="font-size: 1.6rem;">Live in history. Let tenants pay the mortgage.</div>
+      <div class="desc" style="margin-top: 12px;">The ultimate house hack — a Civil War–era guest house that pays for itself</div>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="section-label">Why This Works</div>
+      <table class="fin-table">
+        <tr><td>FHA allows owner-occupied 4-unit purchases</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Each unit has a private entrance — true separation</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Separate utility meters — tenants can pay their own</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Keypad entry — manage rentals with minimal effort</td><td style="color:var(--gold);">✓</td></tr>
+        <tr><td>Mix STR, MTR, and LTR across units to optimize income</td><td style="color:var(--gold);">✓</td></tr>
+      </table>
+    </div>
+
+    <div class="page-footer">
+      <span>Häagen Haus · 617 State St, Alton, IL 62002</span>
+      <span>5</span>
+    </div>
+  </div>
+
+  <!-- PAGE 6: CONTACT / NEXT STEPS -->
+  <div class="page" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+    <div class="section-label">Next Steps</div>
+    <h2 class="section-title" style="font-size: 2.2rem;">Ready to Own<br><em style="font-family: 'Playfair Display', serif; color: var(--gold);">History?</em></h2>
+    <p class="section-text" style="text-align: center; margin: 0 auto 40px;">
+      Schedule a private tour of the Häagen Haus and see firsthand why this is one of the most unique investment opportunities on the Mississippi River.
+    </p>
+    <div class="divider" style="width: 60px; height: 1px; background: var(--gold); margin: 0 auto 40px;"></div>
+
+    <div style="font-size: 0.85rem; color: var(--warm-gray); line-height: 2.2;">
+      <strong style="color: var(--charcoal); font-weight: 500;">Häagen Haus</strong><br>
+      617 State Street, Alton, Illinois 62002<br><br>
+      <strong style="color: var(--gold); letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem;">Schedule a Tour</strong><br>
+      <a href="https://haagenhaus.com/#contact" style="color: var(--gold);">haagenhaus.com</a>
+    </div>
+
+    <div class="page-footer" style="text-align: center; justify-content: center;">
+      <span>Confidential — Prepared for Prospective Buyers · © 2026 Häagen Haus</span>
+    </div>
+  </div>
+
+</body>
+</html>

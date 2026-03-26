@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Häagen Haus — Historic Guest House | Alton, Illinois</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -563,6 +564,7 @@
       .income-grid { grid-template-columns: 1fr 1fr; }
       .income-total .big-number { font-size: 2rem; }
       .contact-form { padding: 0 10px; }
+      #househack > div > div:nth-child(4) { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -734,6 +736,36 @@
         </div>
         <p class="cash-flow-note">Estimated cash-flow surplus of $1,850–$2,000/month with all units rented (before maintenance & reserves)</p>
       </div>
+    </div>
+  </section>
+
+  <!-- HOUSE HACK -->
+  <section id="househack" style="background: var(--dark-green); color: var(--white);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div class="section-label">Owner-Occupant Opportunity</div>
+      <h2 class="section-title" style="color: #fff;">Live in One.<br>Rent the Rest.</h2>
+      <p class="section-text" style="color: rgba(255,255,255,0.6); max-width: 700px;">
+        The Häagen Haus isn't just for investors — it's the perfect house hack. Live in your favorite suite while three others generate income. With FHA financing, you could put as little as 3.5% down on a 4-unit property and let your tenants cover the mortgage.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 60px;">
+        <div style="text-align: center; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold-light);">$4,926</div>
+          <div style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 8px;">Income from 3 Units/mo</div>
+        </div>
+        <div style="text-align: center; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold-light);">3.5%</div>
+          <div style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 8px;">FHA Down Payment</div>
+        </div>
+        <div style="text-align: center; padding: 40px; border: 1px solid rgba(255,255,255,0.1);">
+          <div style="font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--gold-light);">Live Free</div>
+          <div style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-top: 8px;">Or Close to It</div>
+        </div>
+      </div>
+
+      <p style="text-align: center; color: rgba(255,255,255,0.4); font-size: 0.85rem; margin-top: 30px; font-style: italic;">
+        Pick your suite — rent the other three as short-term, mid-term, or long-term rentals. Your home pays for itself.
+      </p>
     </div>
   </section>
 
@@ -968,14 +1000,17 @@
   </footer>
 
   <script>
-    // Show thank you message if redirected back after form submission
+    // Show thank you message + portfolio download after form submission
     if (window.location.search.includes('thanks=1')) {
       document.addEventListener('DOMContentLoaded', function() {
         var form = document.getElementById('contactForm');
         if (form) {
-          form.innerHTML = '<div style="text-align:center;color:var(--gold);font-size:1.2rem;padding:40px 0;">✓ Thank you for your interest! We\'ll be in touch within 24 hours.</div>';
+          form.innerHTML = '<div style="text-align:center;padding:40px 0;">' +
+            '<div style="color:var(--gold);font-size:1.3rem;margin-bottom:16px;">✓ Thank you for your interest!</div>' +
+            '<p style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin-bottom:30px;">We\'ll be in touch within 24 hours.</p>' +
+            '<a href="investment-portfolio.html" target="_blank" style="display:inline-block;border:1px solid var(--gold);color:var(--gold);padding:16px 40px;text-decoration:none;font-size:0.8rem;letter-spacing:3px;text-transform:uppercase;font-weight:500;transition:all 0.3s;" onmouseover="this.style.background=\'var(--gold)\';this.style.color=\'var(--white)\'" onmouseout="this.style.background=\'transparent\';this.style.color=\'var(--gold)\'">📄 Download Investment Portfolio</a>' +
+            '</div>';
         }
-        // Scroll to contact section
         var contact = document.getElementById('contact');
         if (contact) contact.scrollIntoView({behavior:'smooth'});
       });
