@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet" />
+<meta name="googlebot" content="noindex,nofollow" />
+<title>Häagen Haus</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #FAF7F2;
+    --charcoal: #2C2C2C;
+    --gold: #B8956A;
+    --gold-light: #D4B896;
+    --dark-green: #3A4A3A;
+    --warm-gray: #8B8178;
+    --white: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.04);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--charcoal);
+    background: var(--cream);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  header {
+    background: var(--charcoal);
+    color: var(--cream);
+    padding: 28px 40px;
+    border-bottom: 3px solid var(--gold);
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    margin: 0 0 4px 0;
+    letter-spacing: 1px;
+  }
+  header .sub {
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px;
+  }
+  section { margin-bottom: 48px; }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin: 0 0 6px 0;
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 8px;
+  }
+  h2 .helper {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-left: 12px;
+  }
+  .panel {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    padding: 24px;
+    margin-top: 16px;
+  }
+  .fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .field label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--warm-gray);
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+  .field input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #E0DCD4;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    color: var(--charcoal);
+    background: var(--cream);
+  }
+  .field input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,149,106,0.15);
+  }
+  .card {
+    background: var(--white);
+    box-shadow: var(--shadow);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-top: 14px;
+    position: relative;
+    transition: transform 0.15s ease;
+  }
+  .card .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .card .content {
+    font-size: 0.95rem;
+    color: var(--charcoal);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  .card.subject .content {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--charcoal);
+    font-weight: 500;
+  }
+  .card.email .content {
+    background: var(--cream);
+    padding: 16px 18px;
+    border-radius: 4px;
+    border-left: 3px solid var(--gold);
+    line-height: 1.7;
+    font-size: 0.92rem;
+  }
+  .copy-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    padding: 7px 14px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .copy-btn:hover { background: var(--gold); }
+  .copy-btn.copied { background: var(--dark-green); }
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #E0DCD4;
+  }
+  .tab {
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    font-weight: 500;
+  }
+  .tab.active {
+    color: var(--charcoal);
+    border-bottom-color: var(--gold);
+  }
+  .checklist { list-style: none; padding: 0; margin: 0; }
+  .checklist li {
+    padding: 10px 0;
+    border-bottom: 1px solid #F0EDE7;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist input[type="checkbox"] {
+    margin-top: 4px;
+    accent-color: var(--gold);
+    cursor: pointer;
+  }
+  .footnote {
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+    margin-top: 8px;
+  }
+  .placeholder {
+    background: rgba(184,149,106,0.18);
+    color: var(--gold);
+    padding: 1px 4px;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+  @media (max-width: 600px) {
+    main { padding: 24px 16px; }
+    header { padding: 20px; }
+    .copy-btn { position: static; margin-top: 10px; }
+  }
+  /* Passcode gate */
+  #gate {
+    position: fixed; inset: 0;
+    background: var(--charcoal);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 9999;
+  }
+  #gate.hidden { display: none; }
+  #gate .box {
+    background: var(--cream);
+    padding: 40px 40px 32px;
+    border-radius: 8px;
+    width: min(360px, calc(100% - 40px));
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    border-top: 3px solid var(--gold);
+  }
+  #gate h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--charcoal);
+    margin: 0 0 6px 0;
+    border: none;
+    padding: 0;
+  }
+  #gate .sub {
+    font-size: 0.7rem;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  #gate input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #E0DCD4;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--charcoal);
+    background: var(--white);
+    text-align: center;
+    letter-spacing: 1px;
+  }
+  #gate input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(184,149,106,0.15);
+  }
+  #gate button {
+    margin-top: 14px;
+    width: 100%;
+    background: var(--charcoal);
+    color: var(--cream);
+    border: none;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+  #gate button:hover { background: var(--gold); }
+  #gate .err {
+    color: #B5443A;
+    font-size: 0.8rem;
+    margin-top: 12px;
+    min-height: 1em;
+  }
+  body.locked { overflow: hidden; }
+  body.locked main, body.locked header { filter: blur(8px); pointer-events: none; user-select: none; }
+</style>
+</head>
+<body class="locked">
+  <div id="gate">
+    <div class="box">
+      <h2>Häagen Haus</h2>
+      <div class="sub">Restricted</div>
+      <form id="gateForm" autocomplete="off">
+        <input id="gateInput" type="password" placeholder="Passcode" autofocus />
+        <button type="submit">Enter</button>
+        <div class="err" id="gateErr"></div>
+      </form>
+    </div>
+  </div>
+
+  <header>
+    <h1>Häagen Haus — Outreach Dashboard</h1>
+    <div class="sub">Investor cold-email templates · Local only</div>
+  </header>
+
+  <main>
+    <!-- PERSONALIZATION -->
+    <section>
+      <h2>Personalize <span class="helper">fills every template below as you type</span></h2>
+      <div class="panel">
+        <div class="fields">
+          <div class="field">
+            <label for="firstName">First name</label>
+            <input id="firstName" placeholder="e.g. Sarah" />
+          </div>
+          <div class="field">
+            <label for="company">Their company / firm</label>
+            <input id="company" placeholder="e.g. Riverstone Capital" />
+          </div>
+          <div class="field">
+            <label for="market">Market / focus mention</label>
+            <input id="market" placeholder="e.g. Midwest STR" />
+          </div>
+          <div class="field">
+            <label for="reference">Reference property (optional)</label>
+            <input id="reference" placeholder="e.g. the Soulard 4-plex" />
+          </div>
+          <div class="field">
+            <label for="zillow">Zillow listing URL</label>
+            <input id="zillow" placeholder="https://zillow.com/..." />
+          </div>
+        </div>
+        <p class="footnote">Empty fields fall back to <span class="placeholder">{{placeholder}}</span> markers so you can still see what needs filling.</p>
+      </div>
+    </section>
+
+    <!-- SUBJECT LINES -->
+    <section>
+      <h2>Subject lines <span class="helper">5 options · pick one or A/B test</span></h2>
+      <div id="subjects"></div>
+    </section>
+
+    <!-- EMAIL BODIES -->
+    <section>
+      <h2>Email body <span class="helper">two audiences</span></h2>
+      <div class="panel" style="padding: 0;">
+        <div class="tabs" id="bodyTabs"></div>
+        <div id="bodyContent" style="padding: 20px 24px;"></div>
+      </div>
+    </section>
+
+    <!-- HOOK VARIATIONS -->
+    <section>
+      <h2>Opening hooks <span class="helper">swap into line 1 for variety</span></h2>
+      <div id="hooks"></div>
+    </section>
+
+    <!-- CHECKLIST -->
+    <section>
+      <h2>Pre-send checklist</h2>
+      <div class="panel">
+        <ul class="checklist">
+          <li><input type="checkbox" /> Replaced every <span class="placeholder">{{placeholder}}</span> — none left in the email</li>
+          <li><input type="checkbox" /> Pasted the actual Zillow URL</li>
+          <li><input type="checkbox" /> Personalized line 1 with something specific to <em>them</em> (not just their name)</li>
+          <li><input type="checkbox" /> Sending from a real address with full signature</li>
+          <li><input type="checkbox" /> Sending individually (or via a tool that personalizes) — never BCC a list</li>
+          <li><input type="checkbox" /> Re-read once for typos out loud</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+<script>
+  // ---- Passcode gate ----
+  // SHA-256 of the passcode. The plain passcode is not in the source.
+  const GATE_HASH = '5f5832d72b237fcd297e0f53bf8eca4121def8276494f352633f3b981668c479';
+
+  async function sha256(s) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+    return Array.from(new Uint8Array(buf))
+      .map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  function unlock() {
+    document.body.classList.remove('locked');
+    document.getElementById('gate').classList.add('hidden');
+    sessionStorage.setItem('hh_unlocked', '1');
+  }
+
+  if (sessionStorage.getItem('hh_unlocked') === '1') {
+    unlock();
+  }
+
+  document.getElementById('gateForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const input = document.getElementById('gateInput');
+    const err = document.getElementById('gateErr');
+    err.textContent = '';
+    const h = await sha256(input.value);
+    if (h === GATE_HASH) {
+      unlock();
+    } else {
+      err.textContent = 'Incorrect passcode';
+      input.value = '';
+      input.focus();
+    }
+  });
+
+  // Templates use {{vars}} that get substituted from the input fields.
+  const SUBJECTS = [
+    "Turnkey 4-unit Airbnb, Civil-War-era brick, $79k/yr revenue",
+    "4 Airbnbs, one historic building, 4.9★ avg — Alton, IL",
+    "Want a turnkey STR portfolio? (4 units, fully furnished)",
+    "Quick question — do you buy income properties in IL?",
+    "Häagen Haus: 4 units, $42k NOI, walkable to downtown Alton"
+  ];
+
+  const BODIES = {
+    "STR investor": `Hi {{firstName}},
+
+Saw you're active in {{market}} — figured this might be on your radar.
+
+I'm selling Häagen Haus in Alton, IL — a 4-unit turnkey Airbnb in a Civil-War-era brick building (1861) on the National Register of Historic Places. It's already running:
+
+  • $79,284/yr gross across the 4 units
+  • ~$42,861 NOI after taxes, insurance, utilities, vacancy
+  • 4.83–4.92★ on Airbnb across both active listings
+  • Fully furnished, separate meters, keypad entry — closes Monday, books guests Tuesday
+
+Alton's a quietly growing tourism market — Mississippi River views, walking distance to downtown, on the Great River Road. Listed at $545k, which pencils to roughly an 8% cap going in.
+
+If a turnkey 4-unit with real reviews and real revenue fits your box, I'd love to send the full investor packet (P&L, photos, occupancy by month).
+
+Worth a quick look?
+
+Ben Brynildsen
+benbrynildsen5757@gmail.com
+Zillow: {{zillow}}
+Site: https://haagenhaus.com`,
+
+    "House-hacker": `Hi {{firstName}},
+
+Quick question — are you still looking at small multifamily in the Midwest?
+
+I'm selling Häagen Haus, a fully-furnished 4-unit guest house in Alton, IL (the historic river town across from St. Louis). Live in one unit, rent the other three — monthly carry pencils to ~$1,570–$1,720 at current rates and rents.
+
+A few specifics:
+  • 1861 Italianate brick, 4,273 sqft, on the National Register
+  • 4 separate units, separate meters, keypad entry
+  • Already a working Airbnb (4.83–4.92★) — keep it, switch to long-term, or mix
+  • $79k/yr gross today
+
+Listed at $545k. Worth a 10-minute look?
+
+Ben Brynildsen
+benbrynildsen5757@gmail.com
+Zillow: {{zillow}}
+Site: https://haagenhaus.com`,
+
+    "PM company": `Hi {{firstName}},
+
+Brief one — I'm selling a turnkey 4-unit Airbnb in Alton, IL that I think fits {{company}}'s portfolio.
+
+Häagen Haus is a fully-furnished, separately-metered 4-unit in a Civil-War-era historic building. Already operating: 4.83–4.92★ on Airbnb, $79k/yr gross, ~$42k NOI. Self-check-in via keypad, so management overhead is minimal.
+
+Listed at $545k (~8% cap going in). Happy to send the full packet — P&L, occupancy by month, photos.
+
+Quick look?
+
+Ben Brynildsen
+benbrynildsen5757@gmail.com
+Zillow: {{zillow}}
+Site: https://haagenhaus.com`,
+
+    "Soft / personal": `Hi {{firstName}},
+
+Hope you're well. I'll keep this short — I'm selling Häagen Haus in Alton, IL and thought of you.
+
+It's a 4-unit, fully-furnished, turnkey Airbnb in a historic 1861 brick building, currently running at 4.9★ with $79k/yr in gross revenue. Listed at $545k.
+
+If it's not for you, no worries — but if you know anyone hunting for a small turnkey STR portfolio, I'd appreciate a forward.
+
+Thanks!
+Ben
+
+Zillow: {{zillow}}
+Site: https://haagenhaus.com`
+  };
+
+  const HOOKS = [
+    "I'll skip the pitch — 4 units, $79k gross, 4.9★, turnkey. Interested?",
+    "Looking for off-market-feel deals? This one's listed but most STR buyers haven't seen it yet.",
+    "If you bought {{reference}}, you'll probably like this one.",
+    "{{company}} seems to focus on {{market}} — this might be a fit.",
+    "Saw your recent post on {{market}} — wanted to put this on your radar."
+  ];
+
+  // ---- Substitution ----
+  function substitute(text) {
+    const vals = {
+      firstName: document.getElementById('firstName').value.trim(),
+      company:   document.getElementById('company').value.trim(),
+      market:    document.getElementById('market').value.trim(),
+      reference: document.getElementById('reference').value.trim(),
+      zillow:    document.getElementById('zillow').value.trim()
+    };
+    return text.replace(/\{\{(\w+)\}\}/g, (m, k) =>
+      vals[k] ? vals[k] : m
+    );
+  }
+
+  function highlightPlaceholders(html) {
+    return html.replace(/\{\{(\w+)\}\}/g,
+      '<span class="placeholder">{{$1}}</span>');
+  }
+
+  function escapeHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  function renderText(rawText) {
+    return highlightPlaceholders(escapeHtml(substitute(rawText)));
+  }
+
+  // ---- Copy ----
+  function copy(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      const original = btn.textContent;
+      btn.textContent = 'Copied ✓';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = original;
+        btn.classList.remove('copied');
+      }, 1400);
+    });
+  }
+
+  // ---- Render ----
+  function renderSubjects() {
+    const container = document.getElementById('subjects');
+    container.innerHTML = SUBJECTS.map((s, i) => `
+      <div class="card subject">
+        <div class="label">Option ${i + 1}</div>
+        <div class="content" data-raw="${escapeHtml(s)}">${renderText(s)}</div>
+        <button class="copy-btn">Copy</button>
+      </div>
+    `).join('');
+  }
+
+  function renderBodies() {
+    const tabs = document.getElementById('bodyTabs');
+    tabs.innerHTML = Object.keys(BODIES).map((name, i) => `
+      <button class="tab ${i === 0 ? 'active' : ''}" data-body="${name}">${name}</button>
+    `).join('');
+
+    function showBody(name) {
+      const raw = BODIES[name];
+      document.getElementById('bodyContent').innerHTML = `
+        <div class="card email" style="box-shadow:none;margin:0;padding:0;">
+          <button class="copy-btn" style="top:0;right:0;">Copy</button>
+          <div class="content" data-raw="${escapeHtml(raw)}">${renderText(raw)}</div>
+        </div>
+      `;
+    }
+    showBody(Object.keys(BODIES)[0]);
+
+    tabs.addEventListener('click', e => {
+      const btn = e.target.closest('.tab');
+      if (!btn) return;
+      tabs.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      showBody(btn.dataset.body);
+    });
+  }
+
+  function renderHooks() {
+    const container = document.getElementById('hooks');
+    container.innerHTML = HOOKS.map((h, i) => `
+      <div class="card">
+        <div class="label">Hook ${i + 1}</div>
+        <div class="content" data-raw="${escapeHtml(h)}">${renderText(h)}</div>
+        <button class="copy-btn">Copy</button>
+      </div>
+    `).join('');
+  }
+
+  function rerenderAll() {
+    document.querySelectorAll('.content[data-raw]').forEach(el => {
+      el.innerHTML = renderText(el.dataset.raw);
+    });
+  }
+
+  // Init
+  renderSubjects();
+  renderBodies();
+  renderHooks();
+
+  document.querySelectorAll('.field input').forEach(input => {
+    input.addEventListener('input', rerenderAll);
+  });
+
+  document.body.addEventListener('click', e => {
+    const btn = e.target.closest('.copy-btn');
+    if (!btn) return;
+    const card = btn.closest('.card');
+    const content = card.querySelector('.content');
+    copy(substitute(content.dataset.raw), btn);
+  });
+</script>
+</body>
+</html>
